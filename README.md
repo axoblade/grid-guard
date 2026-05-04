@@ -9,33 +9,46 @@ GridGuard Core is a high-integrity asset monitoring ecosystem designed to secure
 ## 📸 Project Gallery
 
 ### 1. Operations Dashboard
+
 The primary command center showing real-time asset health across the grid.
-![Dashboard Assets](./public/screenshots/green-summary.png)
+![Operations Dashboard](./public/screenshots/green-summary.png)
 
 ### 2. Secure Provisioning & Verification
+
 Network-as-Code retrieval protocol ensures hardware integrity before activation.
+
 <p align="center">
-  <img src="./public/screenshots/add-asset.png" width="45%" />
-  <img src="./public/screenshots/add-verification-failed.png" width="45%" />
+   <img src="./public/screenshots/add-asset.png" width="45%" />
+   <img src="./public/screenshots/add-verification-failed.png" width="45%" />
 </p>
 
-### 3. Monetization & Checkout
-Automated prorated billing for device activation.
-![Secure Checkout](./public/screenshots/onboarding-prolated-payment.png)
+### 3. Onboarding Prorated Payment
 
-### 4. Critical Security Event (SIM Swap)
+Prorated payment capture during onboarding before activation.
+![Onboarding Prorated Payment](./public/screenshots/onboarding-prolated-payment.png)
+
+### 4. Asset Re-initialization
+
+Manual re-initialization flow for previously flagged assets.
+![Asset Re-initialization](./public/screenshots/asset-re-initialization.png)
+
+### 5. Critical Security Event (SIM Swap)
+
 Immediate detection of unauthorized tampering with automated broadcast alerts.
-![Critical Alert](./public/screenshots/red-alert-ciritical.png)
+![Critical Security Event](./public/screenshots/red-alert-ciritical.png)
 
-### 5. AI Threat Analysis
+### 6. AI Threat Analysis
+
 Gemini-powered risk assessment providing tactical insights into security breaches.
-![AI Analysis](./public/screenshots/red-alert.png)
+![AI Threat Analysis](./public/screenshots/red-alert.png)
 
-### 6. Incident Resolution
+### 7. Incident Resolution
+
 The "Manual Resolution" loop ensures that critical faults are physically inspected before clearing.
-![Manual Resolution](./public/screenshots/red-alert-resolution.png)
+![Incident Resolution](./public/screenshots/red-alert-resolution.png)
 
-### 7. Real-time Security SMS
+### 8. Real-time Security SMS
+
 Out-of-band notification protocol for immediate site-manager awareness.
 ![SMS Alert](./public/screenshots/alert-sms.jpg)
 
