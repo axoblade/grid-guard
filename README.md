@@ -9,35 +9,48 @@ GridGuard Core is a high-integrity asset monitoring ecosystem designed to secure
 ## 📸 Project Gallery
 
 ### 1. Operations Dashboard
+
 The primary command center showing real-time asset health across the grid.
-![Dashboard Assets](./public/screenshots/dashboard.png)
+![Operations Dashboard](./public/screenshots/green-summary.png)
 
 ### 2. Secure Provisioning & Verification
+
 Network-as-Code retrieval protocol ensures hardware integrity before activation.
+
 <p align="center">
-  <img src="./public/screenshots/provisioning.png" width="45%" />
-  <img src="./public/screenshots/provisioning_error.png" width="45%" />
+   <img src="./public/screenshots/add-asset.png" width="45%" />
+   <img src="./public/screenshots/add-verification-failed.png" width="45%" />
 </p>
 
-### 3. Monetization & Checkout
-Automated prorated billing for device activation.
-![Secure Checkout](./public/screenshots/checkout.png)
+### 3. Onboarding Prorated Payment
 
-### 4. Critical Security Event (SIM Swap)
+Prorated payment capture during onboarding before activation.
+![Onboarding Prorated Payment](./public/screenshots/onboarding-prolated-payment.png)
+
+### 4. Asset Re-initialization
+
+Manual re-initialization flow for previously flagged assets.
+![Asset Re-initialization](./public/screenshots/asset-re-initialization.png)
+
+### 5. Critical Security Event (SIM Swap)
+
 Immediate detection of unauthorized tampering with automated broadcast alerts.
-![Critical Alert](./public/screenshots/critical_alert.png)
+![Critical Security Event](./public/screenshots/red-alert-ciritical.png)
 
-### 5. AI Threat Analysis
+### 6. AI Threat Analysis
+
 Gemini-powered risk assessment providing tactical insights into security breaches.
-![AI Analysis](./public/screenshots/ai_analysis.png)
+![AI Threat Analysis](./public/screenshots/red-alert.png)
 
-### 6. Incident Resolution
+### 7. Incident Resolution
+
 The "Manual Resolution" loop ensures that critical faults are physically inspected before clearing.
-![Manual Resolution](./public/screenshots/resolved_state.png)
+![Incident Resolution](./public/screenshots/red-alert-resolution.png)
 
-### 7. Real-time Security SMS
+### 8. Real-time Security SMS
+
 Out-of-band notification protocol for immediate site-manager awareness.
-![SMS Alert](./public/screenshots/sms_alert.png)
+![SMS Alert](./public/screenshots/alert-sms.jpg)
 
 ## 🚀 Key Features
 
@@ -47,7 +60,7 @@ Out-of-band notification protocol for immediate site-manager awareness.
   - **Location Verification**: Complements GPS data with network-based cell-id tracking.
 - **AI Risk Rating**: Leverages **Google Gemini AI** to analyze asset history, SIM events, and maintenance logs into actionable risk scores (GREEN, ORANGE, RED).
 - **Comprehensive Maintenance Logs**: Automated alerts and manual maintenance scheduling.
-- **Multi-tenant SaaS Infrastructure**: 
+- **Multi-tenant SaaS Infrastructure**:
   - Strict data isolation for different entities.
   - Full-screen integrated billing and subscription management.
   - Support for "Pay-per-Device" and "Enterprise" tiers.
@@ -91,18 +104,21 @@ Out-of-band notification protocol for immediate site-manager awareness.
 ### Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone <repository-url>
    cd gridguard
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Environment Configuration**:
    Create a `.env` file in the root (refer to `.env.example`):
+
    ```env
    # Application Keys
    VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_token
@@ -132,7 +148,7 @@ npm run build
 
 ## 🔐 Data Security & Isolation
 
-GridGuard uses a **Zero-Trust** security model for its data. Every document in the `/transformers`, `/alerts`, and `/billing` collections is protected by ABAC (Attribute-Based Access Control) rules. 
+GridGuard uses a **Zero-Trust** security model for its data. Every document in the `/transformers`, `/alerts`, and `/billing` collections is protected by ABAC (Attribute-Based Access Control) rules.
 
 - Users can only view or modify assets they own (`ownerId == request.auth.uid`).
 - Billing data is strictly private to the authenticated user.
