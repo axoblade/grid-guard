@@ -1,0 +1,6 @@
+{
+  "name": "GridGuard",
+  "description": "Real-time electrical transformer monitoring and management system using Nokia Networkascode APIs, AI risk assessment, and interactive Mapbox dashboards.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["Real-time Monitoring", "AI Risk Rating", "Nokia Networkascode Integration"]
+}

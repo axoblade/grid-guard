@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(data) {
+      return isSignedIn() && data.ownerId == request.auth.uid;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Transformer Validation Blueprint
+    function isValidTransformer(data) {
+      return data.keys().hasAll(['id', 'name', 'serialNumber', 'phoneNumber', 'ownerId', 'registrationLocation', 'status', 'safeRadius', 'alertPhoneNumbers', 'currentLocation', 'simSwapHistory']) &&
+             data.id is string && data.id.size() <= 100 &&
+             data.name is string && data.name.size() <= 100 &&
+             data.serialNumber is string && data.serialNumber.size() <= 100 &&
+             data.phoneNumber is string && data.phoneNumber.size() <= 20 &&
+             data.safeRadius is number &&
+             data.ownerId is string && data.ownerId.size() <= 128 &&
+             data.status in ['GREEN', 'ORANGE', 'RED', 'UNKNOWN', 'DRAFT'] &&
+             data.registrationLocation.latitude is number &&
+             data.registrationLocation.longitude is number &&
+             data.currentLocation.latitude is number &&
+             data.currentLocation.longitude is number &&
+             data.simSwapHistory.lastSwapped is string &&
+             data.simSwapHistory.isFraudPotential is bool;
+    }
+
+    match /transformers/{transformerId} {
+      // Security: Only owners can read their transformers.
+      allow get: if isOwner(existing());
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      allow create: if isSignedIn() && 
+                    isValidId(transformerId) && 
+                    isValidTransformer(incoming()) &&
+                    incoming().ownerId == request.auth.uid &&
+                    incoming().id == transformerId;
+
+      allow update: if isOwner(existing()) && 
+                    isValidTransformer(incoming()) && 
+                    incoming().id == existing().id &&
+                    incoming().serialNumber == existing().serialNumber &&
+                    incoming().ownerId == existing().ownerId; // Immutable owner
+    }
+
+    match /alerts/{alertId} {
+      allow get: if isOwner(existing());
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      allow create: if isSignedIn() && 
+                    incoming().keys().hasAll(['transformerId', 'type', 'message', 'severity', 'createdAt', 'ownerId']) &&
+                    incoming().ownerId == request.auth.uid;
+    }
+
+    match /billing/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /payments/{paymentId} {
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid;
+    }
+  }
+}

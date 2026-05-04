@@ -1,0 +1,112 @@
+{
+  "entities": {
+    "Transformer": {
+      "title": "Transformer",
+      "description": "Information about an electrical transformer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "registrationLocation": { "$ref": "#/entities/Location" },
+        "currentLocation": {
+          "type": "object",
+          "properties": {
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" },
+            "lastUpdated": { "type": "string" }
+          }
+        },
+        "safeRadius": { "type": "number" },
+        "status": { "type": "string", "enum": ["GREEN", "ORANGE", "RED", "UNKNOWN", "DRAFT"] },
+        "riskRating": { "type": "number" },
+        "riskAnalysis": { "type": "string" },
+        "realTimeHint": { "type": "string" },
+        "alertPhoneNumbers": { "type": "array", "items": { "type": "string" } },
+        "maintenanceSchedule": {
+          "type": "object",
+          "properties": {
+            "lastMaintenance": { "type": "string" },
+            "nextMaintenance": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        },
+        "simSwapHistory": {
+          "type": "object",
+          "properties": {
+            "lastSwapped": { "type": "string" },
+            "isFraudPotential": { "type": "boolean" }
+          }
+        }
+      },
+      "required": ["id", "name", "serialNumber", "phoneNumber", "registrationLocation", "status", "ownerId"]
+    },
+    "Location": {
+      "title": "Location",
+      "type": "object",
+      "properties": {
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" }
+      }
+    },
+    "Alert": {
+      "title": "Alert",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "transformerId": { "type": "string" },
+        "transformerName": { "type": "string" },
+        "type": { "type": "string" },
+        "message": { "type": "string" },
+        "severity": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "isRead": { "type": "boolean" }
+      }
+    },
+    "Billing": {
+      "title": "Billing",
+      "type": "object",
+      "properties": {
+        "currentPlan": { "type": "string" },
+        "status": { "type": "string" },
+        "periodStart": { "type": "string" },
+        "periodEnd": { "type": "string" },
+        "cancelAtPeriodEnd": { "type": "boolean" },
+        "upcomingPlan": { "type": "string" }
+      }
+    },
+    "Payment": {
+      "title": "Payment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "plan": { "type": "string" },
+        "description": { "type": "string" },
+        "userId": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/transformers/{transformerId}": {
+      "schema": "Transformer",
+      "description": "User-owned transformer monitoring points. Strictly isolated by ownerId."
+    },
+    "/alerts/{alertId}": {
+      "schema": "Alert",
+      "description": "System alerts and notifications. Strictly isolated by ownerId."
+    },
+    "/billing/{userId}": {
+      "schema": "Billing",
+      "description": "User subscription status"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payment history"
+    }
+  }
+}
