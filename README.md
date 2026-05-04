@@ -2,6 +2,43 @@
 
 GridGuard is a production-ready, real-time electrical transformer monitoring and management system. It provides utilities and infrastructure managers with a unified dashboard to monitor asset health, prevent SIM-based fraud, and leverage AI for predictive risk assessment.
 
+## 🔴 System Summary & Process Flow
+
+GridGuard Core is a high-integrity asset monitoring ecosystem designed to secure critical infrastructure, specifically electrical transformers, against physical and digital threats through a multi-layered verification process. The application flow begins with **Secure Asset Provisioning**, where a technician registers a device using its serial code and SIM endpoint, triggering a real-time 'Location Verification' protocol that matches network Cell-IDs against onboard GPS coordinates to ensure the hardware is exactly where it claims to be. This is followed by a **Secure Checkout** phase, where prorated consumption models are settled before the node goes 'LIVE'. Once active, the system enters a **'Continuous Monitoring'** state, utilizing Nokia Networkascode APIs to detect SIM-swap events—a key indicator of tampering; if a SIM swap is detected, the asset is immediately flagged as RED, a **Critical Security Event** notification is broadcast, and an automated SMS alert is dispatched to designated security personnel. This raw data is then ingested by an **AI Risk Assessment Engine** powered by Google Gemini, which generates nuanced threat analysis reports, distinguishing between operational drift and organized crime patterns, and locking the asset into a 'Manual Resolution' state until a verified supervisor resolves the breach, effectively closing the loop between real-time network signals and actionable security intelligence.
+
+## 📸 Project Gallery
+
+### 1. Operations Dashboard
+The primary command center showing real-time asset health across the grid.
+![Dashboard Assets](./public/screenshots/dashboard.png)
+
+### 2. Secure Provisioning & Verification
+Network-as-Code retrieval protocol ensures hardware integrity before activation.
+<p align="center">
+  <img src="./public/screenshots/provisioning.png" width="45%" />
+  <img src="./public/screenshots/provisioning_error.png" width="45%" />
+</p>
+
+### 3. Monetization & Checkout
+Automated prorated billing for device activation.
+![Secure Checkout](./public/screenshots/checkout.png)
+
+### 4. Critical Security Event (SIM Swap)
+Immediate detection of unauthorized tampering with automated broadcast alerts.
+![Critical Alert](./public/screenshots/critical_alert.png)
+
+### 5. AI Threat Analysis
+Gemini-powered risk assessment providing tactical insights into security breaches.
+![AI Analysis](./public/screenshots/ai_analysis.png)
+
+### 6. Incident Resolution
+The "Manual Resolution" loop ensures that critical faults are physically inspected before clearing.
+![Manual Resolution](./public/screenshots/resolved_state.png)
+
+### 7. Real-time Security SMS
+Out-of-band notification protocol for immediate site-manager awareness.
+![SMS Alert](./public/screenshots/sms_alert.png)
+
 ## 🚀 Key Features
 
 - **Real-time Monitoring**: Centralized Mapbox dashboard for tracking transformer geolocation and status.
